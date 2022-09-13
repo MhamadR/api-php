@@ -10,7 +10,13 @@ if(date("m") == 12 && date("d") > 25){
 
 $time = time();
 $seconds = $christmasDay - $time;
-$days = floor($seconds/86400);
+$d = floor($seconds/86400);
+
+$days = [
+    "daysLeft" => $d
+];
+
+echo json_encode($days);
 echo "Days left till next Christmas: " . $days . "<br><br>";
 /***********************/
 
@@ -38,10 +44,17 @@ function check_palindrome($string){
 
     if ($string == $reverse) {
         echo "$string is a palindrome<br><br>";
+        $isPal = [
+            "isPalindrome" => True
+        ]
     } 
     else {
         echo "$string is not a palindrome<br><br>";
+        $isPal = [
+            "isPalindrome" => False
+        ]
     }
+    echo json_encode($isPal);
 }
 /***********************/
 
@@ -60,6 +73,7 @@ if(isset($_POST['varA']) && isset($_POST['varB']) && isset($_POST['varC'])) {
 function applyFormula($a, $b, $c) {
     $result = $a ** $b + $b * $c - $a / $b;
     echo "a^3 + b*c - a/b = " . $result . "<br><br>";
+    echo json_encode(["formulaResult" => $result]);
 }
 /***********************/
 
@@ -93,8 +107,10 @@ function checkPassword($pass) {
 
     if ($result == ""){
         echo "Password is strong<br><br>";
+        echo json_encode(["passwordStrength" => "strong"]);
     } else {
         echo $result;
+        echo json_encode(["passwordStrength" => "weak"]);
     }
 }
 /***********************/
