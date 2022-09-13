@@ -8,6 +8,17 @@ if(isset($_GET['string'])) {
     }
 }
 
+if(isset($_POST['varA']) && isset($_POST['varB']) && isset($_POST['varC'])) {
+    $a = $_POST['varA'];
+    $b = $_POST['varB'];
+    $c = $_POST['varC'];
+    if(!empty($a) && !empty($b) && !empty($c)){
+        applyFormula($a, $b, $c);
+    } else {
+        echo "Missing required data";
+    }
+}
+
 function check_palindrome($string){
     $string = str_replace(' ', '', $string);
 
@@ -20,13 +31,18 @@ function check_palindrome($string){
     //reverse the string
     $reverse = strrev($string);
 
-    //check if the reversed string is equal the string
     if ($string == $reverse) {
         echo "$string is a palindrome";
     } 
     else {
         echo "$string is not a palindrome";
     }
+}
+
+function applyFormula($a, $b, $c) {
+    // a^3 + b*c - a/b
+    $result = $a ** $b + $b * $c - $a / $b;
+    echo $result;
 }
 
 ?>
@@ -41,8 +57,20 @@ function check_palindrome($string){
 </head>
 <body>
     <form action="api.php" method="get">
-        <label for="strPalindrome">Enter a string to check if it is a palindrome: </label>
+        <label for="strPalindrome">Enter a string to check for palindrome: </label>
         <input type="text" name="string" id="strPalindrome">
-    </form>
+
+        <input type="submit" value="Submit">
+
+        <label for="varA">Enter a number a: </label>
+        <input type="text" name="varA" id="varA">
+
+        <label for="varB">Enter a number b: </label>
+        <input type="text" name="varB" id="varB">
+
+        <label for="varC">Enter a number c: </label>
+        <input type="text" name="varC" id="varC">
+
+        <input type="submit" value="Submit using post" formmethod="post">
 </body>
 </html>
