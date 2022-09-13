@@ -19,6 +19,40 @@ if(isset($_POST['varA']) && isset($_POST['varB']) && isset($_POST['varC'])) {
     }
 }
 
+if(isset($_POST['password'])) {
+    $password = $_POST['password'];
+    if(!empty($password)) {
+        checkPassword($password);
+    } else {
+        echo "Missing required data";
+    }
+}
+
+function checkPassword($pass) {
+    $result = "";
+    if (strlen($pass) < 12) {
+        $result .= "Weak! Password too short! <br>";
+    }
+
+    if (!preg_match("#[0-9]+#", $pass)) {
+        $result .= "Weak! Password must include at least one number! <br>";
+    }
+
+    if (!preg_match("#[a-z]+#", $pass)) {
+        $result .= "Weak! Password must include at least one lowercase letter! <br>";
+    }
+
+    if (!preg_match("#[A-Z]+#", $pass)) {
+        $result .= "Weak! Password must include at least one uppercase letter! <br>";
+    }
+
+    if ($result == ""){
+        echo "Password is strong";
+    } else {
+        echo $result;
+    }
+}
+
 function check_palindrome($string){
     $string = str_replace(' ', '', $string);
 
@@ -70,6 +104,11 @@ function applyFormula($a, $b, $c) {
 
         <label for="varC">Enter a number c: </label>
         <input type="text" name="varC" id="varC">
+
+        <input type="submit" value="Submit using post" formmethod="post">
+
+        <label for="pass">Enter a password: </label>
+        <input type="text" name="password" id="pass">
 
         <input type="submit" value="Submit using post" formmethod="post">
 </body>
