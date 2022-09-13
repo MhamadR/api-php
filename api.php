@@ -17,7 +17,7 @@ $days = [
 ];
 
 echo json_encode($days);
-echo "Days left till next Christmas: " . $days . "<br><br>";
+echo "<br> Days left till next Christmas: " . $d . "<br><br>";
 /***********************/
 
 /*Checking if the input string is a palindrome*/
@@ -46,13 +46,13 @@ function check_palindrome($string){
         echo "$string is a palindrome<br><br>";
         $isPal = [
             "isPalindrome" => True
-        ]
+        ];
     } 
     else {
         echo "$string is not a palindrome<br><br>";
         $isPal = [
             "isPalindrome" => False
-        ]
+        ];
     }
     echo json_encode($isPal);
 }
